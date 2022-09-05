@@ -21,6 +21,7 @@
 		27A707AB28C510B20084B3CA /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A707AA28C510B20084B3CA /* Book.swift */; };
 		27A707AD28C511370084B3CA /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A707AC28C511370084B3CA /* BookDetails.swift */; };
 		27A707B128C513C00084B3CA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A707B028C513C00084B3CA /* MainTabBarController.swift */; };
+		27A707B428C515CF0084B3CA /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A707B328C515CF0084B3CA /* BookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		27A707AA28C510B20084B3CA /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		27A707AC28C511370084B3CA /* BookDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetails.swift; sourceTree = "<group>"; };
 		27A707B028C513C00084B3CA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		27A707B328C515CF0084B3CA /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		27A7079A28C50D3D0084B3CA /* SearchBook */ = {
 			isa = PBXGroup;
 			children = (
+				27A707B228C515A90084B3CA /* Cell */,
 				27A7079D28C50D7D0084B3CA /* SearchBooksPresenter.swift */,
 				27A7079E28C50D7D0084B3CA /* SearchBooksWorker.swift */,
 				27A7079F28C50D7D0084B3CA /* SearchBooksRouter.swift */,
@@ -161,6 +164,14 @@
 				27A707B028C513C00084B3CA /* MainTabBarController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		27A707B228C515A90084B3CA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				27A707B328C515CF0084B3CA /* BookCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +248,7 @@
 				27A707A728C50D7D0084B3CA /* SearchBooksViewController.swift in Sources */,
 				27A707B128C513C00084B3CA /* MainTabBarController.swift in Sources */,
 				27A707A528C50D7D0084B3CA /* SearchBooksRouter.swift in Sources */,
+				27A707B428C515CF0084B3CA /* BookCell.swift in Sources */,
 				27A707AB28C510B20084B3CA /* Book.swift in Sources */,
 				27A707A628C50D7D0084B3CA /* SearchBooksModels.swift in Sources */,
 				27A707AD28C511370084B3CA /* BookDetails.swift in Sources */,

@@ -1,25 +1,25 @@
 import UIKit
 
 protocol SearchBooksBusinessLogic {
-    func doSomething(request: SearchBooks.Something.Request)
+    func doSomething(request: SearchBooks.SearchBook.Request)
 }
 
 protocol SearchBooksDataStore {
-    //var name: String { get set }
+    var text: String { get set }
 }
 
 class SearchBooksInteractor: SearchBooksBusinessLogic, SearchBooksDataStore {
+    
+    var text: String = ""
     var presenter: SearchBooksPresentationLogic?
     var worker: SearchBooksWorker?
-    //var name: String = ""
     
     // MARK: Do something
     
-    func doSomething(request: SearchBooks.Something.Request) {
+    func doSomething(request: SearchBooks.SearchBook.Request) {
         worker = SearchBooksWorker()
-        worker?.doSomeWork()
-        
-        let response = SearchBooks.Something.Response()
-        presenter?.presentSomething(response: response)
+        worker?.fetchBooks(by: text)
+//        let response = SearchBooks.SearchBook.Response()
+//        presenter?.presentSomething(response: response)
     }
 }

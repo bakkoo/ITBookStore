@@ -2,6 +2,6 @@ import UIKit
 
 class SearchBooksWorker {
     
-    func doSomeWork() { }
+    func fetchBooks(by name: String) { }
     
 }
