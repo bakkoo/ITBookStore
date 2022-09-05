@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Books
-struct Books: Codable {
+struct Books: Decodable {
     let total: String
     let page: String
     let books: [Book]

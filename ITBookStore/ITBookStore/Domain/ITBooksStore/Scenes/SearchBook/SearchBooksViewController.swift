@@ -1,28 +1,20 @@
 import UIKit
+import Combine
 
 protocol SearchBooksDisplayLogic: AnyObject {
     func displaySomething(viewModel: SearchBooks.SearchBook.ViewModel)
 }
 
 class SearchBooksViewController: UIViewController, SearchBooksDisplayLogic {
-    var interactor: SearchBooksBusinessLogic?
+    
+    var interactor: (SearchBooksBusinessLogic & SearchBooksInteractor)?
+    
     var router: (NSObjectProtocol & SearchBooksRoutingLogic & SearchBooksDataPassing)?
     
-    private var dummyData: [String] = {
-        let data = [
-            "Some data1",
-            "Some data2",
-            "Some data3",
-            "Some data4",
-            "Some data5",
-            "Some data6",
-            "Some data7",
-            "Some data8",
-            "Some data9"
-        ]
-        return data
-    }()
-    
+    private var searchController = UISearchController(searchResultsController: nil)
+    private var subscribers = Set<AnyCancellable>()
+    private var books: [Book] = []
+
     let tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +50,13 @@ class SearchBooksViewController: UIViewController, SearchBooksDisplayLogic {
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
+        
+        interactor.$books.sink { future in
+            self.books.append(contentsOf: future)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }.store(in: &self.subscribers)
     }
     
     // MARK: Routing
@@ -80,6 +79,12 @@ class SearchBooksViewController: UIViewController, SearchBooksDisplayLogic {
         tableView.dataSource = self
         doSomething()
         setupTableViewConstraints()
+        configureSearchController()
+    }
+    
+    private func configureSearchController() {
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
     }
     
     fileprivate func setupTableViewConstraints() {
@@ -94,7 +99,7 @@ class SearchBooksViewController: UIViewController, SearchBooksDisplayLogic {
     //@IBOutlet weak var nameTextField: UITextField!
     
     func doSomething() {
-        let request = SearchBooks.SearchBook.Request(searchText: "", page: 0)
+        let request = SearchBooks.SearchBook.Request(searchText: "mongodb", page: 1)
         interactor?.doSomething(request: request)
     }
     
@@ -116,12 +121,17 @@ extension SearchBooksViewController: UITableViewDelegate {
 extension SearchBooksViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyData.count
+        interactor?.books.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier, for: indexPath) as? BookCell else { return UITableViewCell() }
-        cell.configure(with: dummyData[indexPath.row], title: dummyData[indexPath.row])
+        cell.configure(with: books[indexPath.row].title, title: books[indexPath.row].title)
         return cell
     }
+}
+
+// MARK: Search Delegate
+extension SearchBooksViewController: UISearchBarDelegate {
+    
 }

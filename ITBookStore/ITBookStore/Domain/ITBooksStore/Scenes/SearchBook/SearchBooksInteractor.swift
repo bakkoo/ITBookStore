@@ -1,4 +1,4 @@
-import UIKit
+import Combine
 
 protocol SearchBooksBusinessLogic {
     func doSomething(request: SearchBooks.SearchBook.Request)
@@ -12,13 +12,18 @@ class SearchBooksInteractor: SearchBooksBusinessLogic, SearchBooksDataStore {
     
     var text: String = ""
     var presenter: SearchBooksPresentationLogic?
-    var worker: SearchBooksWorker?
-    
+    var worker = SearchBooksNetworkWorker()
+    @Published var books: [Book] = []
+    private var subscribers = Set<AnyCancellable>()
     // MARK: Do something
     
     func doSomething(request: SearchBooks.SearchBook.Request) {
-        worker = SearchBooksWorker()
-        worker?.fetchBooks(by: text)
+        worker = SearchBooksNetworkWorker()
+        worker.fetchBooks(request: request)
+        worker.$books.sink { book in
+            self.books = book
+        }.store(in: &self.subscribers)
+        
 //        let response = SearchBooks.SearchBook.Response()
 //        presenter?.presentSomething(response: response)
     }
