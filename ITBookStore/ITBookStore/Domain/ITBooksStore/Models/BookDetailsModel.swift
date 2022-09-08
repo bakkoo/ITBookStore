@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - BookDetails
-struct BookDetails: Codable {
+struct BookDetailsModel: Codable {
     let error: String
     let title: String
     let subtitle: String
