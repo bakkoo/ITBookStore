@@ -8,7 +8,6 @@ class BookCell: UITableViewCell {
     // MARK: UI Setup
     let coverImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 14
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "photo.circle")
@@ -18,7 +17,7 @@ class BookCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -34,7 +33,7 @@ class BookCell: UITableViewCell {
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .black
         separatorInset = .zero
         selectionStyle = .gray
         setupConstraints()
@@ -47,23 +46,27 @@ class BookCell: UITableViewCell {
     private func setupConstraints() {
         // Container View Setup
         addSubview(containerView)
-        containerView.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 12).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+        containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         // Image Setup
         containerView.addSubview(coverImage)
-        coverImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        coverImage.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        coverImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12).isActive = true
+        coverImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        coverImage.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
+        coverImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
+        coverImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
         // Label Setup
         containerView.addSubview(titleLabel)
         titleLabel.centerYAnchor.constraint(equalTo: coverImage.centerYAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: coverImage.trailingAnchor, constant: 8).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -20).isActive = true
+        titleLabel.numberOfLines = 3
     }
     
-    func configure(with img: String, title: String) {
+    func configure(with img: UIImage?, title: String) {
         self.titleLabel.text = title
+        self.coverImage.image = img
     }
     
 }

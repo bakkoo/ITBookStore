@@ -1,8 +1,10 @@
-//
-//  String+Extensions.swift
-//  ITBookStore
-//
-//  Created by Bakur Khalvashi on 06.09.22.
-//
-
 import Foundation
+extension String {
+    func replace(string:String, replacement:String) -> String {
+        return self.replacingOccurrences(of: string, with: replacement, options: NSString.CompareOptions.literal, range: nil)
+    }
+    
+    func removeWhitespace() -> String {
+        return self.replace(string: " ", replacement: "")
+    }
+}

@@ -10,7 +10,10 @@ class SearchBooksPresenter: SearchBooksPresentationLogic {
     // MARK: Do something
     
     func presentSomething(response: SearchBooks.SearchBook.Response) {
-        let viewModel = SearchBooks.SearchBook.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+        let isbn = response.book.isbn13
+        print(isbn)
+        
+//        let viewModel = SearchBooks.SearchBook.ViewModel()
+//        viewController?.displaySomething(viewModel: viewModel)
     }
 }

@@ -7,15 +7,17 @@ enum SearchBooks {
         
         struct Request {
             let searchText: String
-            let page: Int
+            let isPaginating: Bool
+            let reload: Bool
         }
         
         struct Response {
-            let books: Books
+            let book: Book
         }
         
         struct ViewModel {
-            
+            let image: UIImage?
+            let title: String
         }
     }
 }

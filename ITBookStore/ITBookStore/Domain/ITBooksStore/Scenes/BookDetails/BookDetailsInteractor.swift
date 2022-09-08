@@ -12,30 +12,26 @@
 
 import UIKit
 
-protocol BookDetailsBusinessLogic
-{
-  func doSomething(request: BookDetails.Something.Request)
+protocol BookDetailsBusinessLogic {
+  func doSomething(request: BookDetails.BookDetail.Request)
 }
 
-protocol BookDetailsDataStore
-{
+protocol BookDetailsDataStore {
   //var name: String { get set }
 }
 
-class BookDetailsInteractor: BookDetailsBusinessLogic, BookDetailsDataStore
-{
+class BookDetailsInteractor: BookDetailsBusinessLogic, BookDetailsDataStore {
   var presenter: BookDetailsPresentationLogic?
   var worker: BookDetailsWorker?
   //var name: String = ""
   
   // MARK: Do something
   
-  func doSomething(request: BookDetails.Something.Request)
-  {
+  func doSomething(request: BookDetails.BookDetail.Request) {
     worker = BookDetailsWorker()
     worker?.doSomeWork()
     
-    let response = BookDetails.Something.Response()
-    presenter?.presentSomething(response: response)
+//    let response = BookDetails.BookDetail.Response()
+//    presenter?.presentSomething(response: response)
   }
 }
